@@ -31,7 +31,31 @@
     		
     		<p:outputLabel value="Senha" for="senha"/>
     		<p:password id="senha" size="20" maxlength="20" />
+    		
     	</p:panelGrid>
     	
+    	<p:panelGrid columns="2" styleClass="sem-bordas">
+    		<p:selectOneMenu id="grupo">
+    			<f:selectItem itemLabel="Selecione um grupo"/>
+    		</p:selectOneMenu>
+    		<p:commandButton value="Adicionar grupo"/>
+    	</p:panelGrid>
+    	
+    	<p:dataTable id="gruposTable" value="#{pesquisaGruposBean.gruposFiltrados}" var="grupo"
+	    		style="margin-top: 20px" emptyMessage="Nenhum grupo encontrado."
+	    		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Logradouro" >
+	    			<h:outputText value="Rua Moradas das Margaridas"/>
+	    		</p:column>
+	    		
+	    		<p:column headerText="Grupo">
+	    			<h:outputText value="Adminstrador"/>
+	    		</p:column>
+	    		
+	    		<p:column style="text-align: center; width: 50px">
+	    			<p:button icon="ui-icon-pencil" title="Editar" />
+	    		</p:column>
+	    	</p:dataTable>
     </ui:define>
 </ui:composition>

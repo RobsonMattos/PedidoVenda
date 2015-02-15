@@ -39,5 +39,92 @@
     		<p:inputText id="email" size="60" maxlength="60"/>
     	</p:panelGrid>
     	
-    </ui:define>
+    	<p:spacer />
+    	<p:spacer />
+    	
+    	<p:commandButton value="Adicionar endereço" onclick="inclusaologradouroDialog.show(); return false;"  style="margin-top:25px" />
+
+		<p:dataTable id="logradouroTable"
+			value="#{pesquisaEnderecosBean.enderecosFiltrados}" var="endereco"
+			style="margin-top: 20px" emptyMessage="Nenhum endereço encontrado."
+			rows="20" paginator="true" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom">
+
+			<p:column headerText="Logradouro">
+				<h:outputText value="Rua Moradas das Margaridas" />
+			</p:column>
+
+			<p:column headerText="Número">
+				<h:outputText value="100" />
+			</p:column>
+
+			<p:column headerText="Complemento">
+				<h:outputText value="Ap 102" />
+			</p:column>
+
+			<p:column headerText="CEP">
+				<h:outputText value="40000-000" />
+			</p:column>
+
+			<p:column headerText="Cidade/UF">
+				<h:outputText value="Salvador/BA" />
+			</p:column>
+
+			<p:column style="text-align: center; width: 50px">
+				<p:button icon="ui-icon-pencil" title="Editar" />
+				<p:commandButton icon="ui-icon-trash" title="Excluir" />
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Inclusão de Logradouros"
+			widgetVar="inclusaologradouroDialog" modal="true" resizable="false">
+			<h:panelGroup id="inclusaoPanel">
+				<p:messages />
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Logradouro" />
+					<p:inputText value="Rua Bento Agua" required="true" size="50"
+						requiredMessage="Informe o nome do Logradouro." />
+					
+					<p:outputLabel value="Número" />
+					<p:inputText value="10" required="true" size="10"
+						requiredMessage="Informe o número do Logradouro." />
+					
+					<p:outputLabel value="Complemento" />
+					<p:inputText value="Fundos" required="true" size="25"
+						requiredMessage="Informe o complemento." />
+
+						<p:outputLabel value="CEP" />
+						<p:inputText value="40000-000" required="true"
+							requiredMessage="Informe o CEP." />
+
+					<p:outputLabel value="Cidade" />
+					<h:panelGroup>
+						<p:inputText value="Salvador" required="true" size="25"
+							requiredMessage="Informe a cidade" />
+				
+						<p:outputLabel value="UF" style="margin: 0 10px 0 10px;" />
+						<p:inputText value="BA" required="true" size="5"
+							requiredMessage="Informe a UF" />
+					</h:panelGroup>
+
+					<p:outputLabel value="" />
+					<p:commandButton value="Incluir"
+						update="logradouroTable inclusaoPanel"
+						oncomplete="tratarInclusaologradouro(args)" />
+				</h:panelGrid>
+
+			</h:panelGroup>
+
+			<script>
+				function tratarInclusaologradouro(args) {
+					if (!args.validationFailed) {
+						inclusaologradouroDialog.hide();
+					}
+				}
+			</script>
+
+		</p:dialog>
+
+	</ui:define>
 </ui:composition>
