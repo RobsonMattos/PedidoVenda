@@ -55,7 +55,14 @@
 	    		
 	    		<p:column style="text-align: center; width: 50px">
 	    			<p:button icon="ui-icon-pencil" title="Editar" />
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()" />
 	    		</p:column>
 	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de grupo" message="Tem certeza que deseja excluir o grupo?"
+	    		widgetVar="confirmacaoExclusao">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" />
+	    	</p:confirmDialog>
     </ui:define>
 </ui:composition>

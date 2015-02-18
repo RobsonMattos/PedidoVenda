@@ -45,7 +45,6 @@
     	<p:commandButton value="Adicionar endereço" onclick="inclusaologradouroDialog.show(); return false;"  style="margin-top:25px" />
 
 		<p:dataTable id="logradouroTable"
-			value="#{pesquisaEnderecosBean.enderecosFiltrados}" var="endereco"
 			style="margin-top: 20px" emptyMessage="Nenhum endereço encontrado."
 			rows="20" paginator="true" paginatorAlwaysVisible="false"
 			paginatorPosition="bottom">
@@ -72,7 +71,7 @@
 
 			<p:column style="text-align: center; width: 50px">
 				<p:button icon="ui-icon-pencil" title="Editar" />
-				<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()" />
 			</p:column>
 		</p:dataTable>
 
@@ -115,6 +114,12 @@
 				</h:panelGrid>
 
 			</h:panelGroup>
+
+			<p:confirmDialog header="Exclusão de endereco" message="Tem certeza que deseja excluir o endereço?"
+	    		widgetVar="confirmacaoExclusao">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" />
+	    	</p:confirmDialog>
 
 			<script>
 				function tratarInclusaologradouro(args) {
