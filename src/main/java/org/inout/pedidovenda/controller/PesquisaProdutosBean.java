@@ -1,5 +1,6 @@
 package org.inout.pedidovenda.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class PesquisaProdutosBean {
+public class PesquisaProdutosBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private List<Integer> produtosFiltrados;
 	
 	public PesquisaProdutosBean() {
