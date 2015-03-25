@@ -13,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="cliente")
@@ -37,7 +40,9 @@ public class Cliente implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@NotBlank
+	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getNome() {
 		return nome;
@@ -47,6 +52,8 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
+	@NotBlank
+	@Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getEmail() {
 		return email;
@@ -56,6 +63,8 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 	
+	@NotBlank
+	@Size(max = 14)
 	@Column(name = "doc_receita_federal", nullable = false, length = 14)
 	public String getDocumentoReceitaFederal() {
 		return documentoReceitaFederal;

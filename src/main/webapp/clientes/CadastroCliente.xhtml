@@ -1,127 +1,139 @@
 <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Novo cliente</ui:define>
-    
-    <ui:define name="corpo">
-    	<h1>Novo cliente</h1>
-    	
-    	<p:toolbar style="margin-top: 20px">
-    		<p:toolbarGroup>
-    			<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-    			<p:commandButton value="Salvar" id="botaoSalvar"/>
-    		</p:toolbarGroup>
-    		<p:toolbarGroup align="right">
-    			<p:button value="Pesquisa"/>
-    		</p:toolbarGroup>
-    	</p:toolbar>
-    	
-    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
-    			columnClasses="rotulo, campo">
-    		
-    		<p:outputLabel value="Nome" for="nome"/>
-    		<p:inputText id="nome" size="60" maxlength="80"/>
-    		
-    		<p:outputLabel value="Tipo" for="tipo"/>
-    		<p:selectOneRadio id="tipo" styleClass="sem-bordas">
-    			<f:selectItem itemLabel="Física"/>
-    			<f:selectItem itemLabel="Jurídica"/>
-    		</p:selectOneRadio>
-    		
-    		<p:outputLabel value="CNPJ" for="cnpj"/>
-    		<p:inputText id="cnpj" size="30" maxlength="30"/>
-    		
-    		<p:outputLabel value="E-mail" for="email"/>
-    		<p:inputText id="email" size="60" maxlength="60"/>
-    	</p:panelGrid>
-    	
-    	<p:spacer />
-    	<p:spacer />
-    	
-    	<p:commandButton value="Adicionar endereço" onclick="inclusaologradouroDialog.show(); return false;"  style="margin-top:25px" />
+	<ui:define name="titulo">Novo cliente</ui:define>
 
-		<p:dataTable id="logradouroTable"
-			style="margin-top: 20px" emptyMessage="Nenhum endereço encontrado."
-			rows="20" paginator="true" paginatorAlwaysVisible="false"
-			paginatorPosition="bottom">
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Novo cliente</h1>
 
-			<p:column headerText="Logradouro">
-				<h:outputText value="Rua Moradas das Margaridas" />
-			</p:column>
+			<p:messages autoUpdate="true" closable="true" />
 
-			<p:column headerText="Número">
-				<h:outputText value="100" />
-			</p:column>
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+					<p:commandButton value="Salvar" id="botaoSalvar" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
 
-			<p:column headerText="Complemento">
-				<h:outputText value="Ap 102" />
-			</p:column>
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
-			<p:column headerText="CEP">
-				<h:outputText value="40000-000" />
-			</p:column>
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80"
+					value="#{cadastroClienteBean.cliente.nome}" />
 
-			<p:column headerText="Cidade/UF">
-				<h:outputText value="Salvador/BA" />
-			</p:column>
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneRadio id="tipo" styleClass="sem-bordas">
+					<f:selectItem itemLabel="Física" />
+					<f:selectItem itemLabel="Jurídica" />
+				</p:selectOneRadio>
 
-			<p:column style="text-align: center; width: 50px">
-				<p:button icon="ui-icon-pencil" title="Editar" />
-				<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()" />
-			</p:column>
-		</p:dataTable>
+				<p:outputLabel value="CNPJ" for="cnpj" />
+				<p:inputText id="cnpj" size="30" maxlength="30"
+					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" />
 
-		<p:dialog header="Inclusão de Logradouros"
-			widgetVar="inclusaologradouroDialog" modal="true" resizable="false">
-			<h:panelGroup id="inclusaoPanel">
-				<p:messages />
-				<h:panelGrid columns="2">
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="60" maxlength="60"
+					value="#{cadastroClienteBean.cliente.email}" />
+			</p:panelGrid>
 
-					<p:outputLabel value="Logradouro" />
-					<p:inputText value="Rua Bento Agua" required="true" size="50"
-						requiredMessage="Informe o nome do Logradouro." />
-					
-					<p:outputLabel value="Número" />
-					<p:inputText value="10" required="true" size="10"
-						requiredMessage="Informe o número do Logradouro." />
-					
-					<p:outputLabel value="Complemento" />
-					<p:inputText value="Fundos" required="true" size="25"
-						requiredMessage="Informe o complemento." />
+			<p:spacer />
+			<p:spacer />
+
+			<p:commandButton value="Adicionar endereço"
+				onclick="inclusaologradouroDialog.show(); return false;"
+				style="margin-top:25px" />
+
+			<p:dataTable id="logradouroTable" style="margin-top: 20px"
+				emptyMessage="Nenhum endereço encontrado." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Logradouro">
+					<h:outputText value="Rua Moradas das Margaridas" />
+				</p:column>
+
+				<p:column headerText="Número">
+					<h:outputText value="100" />
+				</p:column>
+
+				<p:column headerText="Complemento">
+					<h:outputText value="Ap 102" />
+				</p:column>
+
+				<p:column headerText="CEP">
+					<h:outputText value="40000-000" />
+				</p:column>
+
+				<p:column headerText="Cidade/UF">
+					<h:outputText value="Salvador/BA" />
+				</p:column>
+
+				<p:column style="text-align: center; width: 50px">
+					<p:button icon="ui-icon-pencil" title="Editar" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" />
+				</p:column>
+			</p:dataTable>
+
+			<p:dialog header="Inclusão de Logradouros"
+				widgetVar="inclusaologradouroDialog" modal="true" resizable="false">
+				<h:panelGroup id="inclusaoPanel">
+					<p:messages />
+					<h:panelGrid columns="2">
+
+						<p:outputLabel value="Logradouro" />
+						<p:inputText value="Rua Bento Agua" required="true" size="50"
+							requiredMessage="Informe o nome do Logradouro." />
+
+						<p:outputLabel value="Número" />
+						<p:inputText value="10" required="true" size="10"
+							requiredMessage="Informe o número do Logradouro." />
+
+						<p:outputLabel value="Complemento" />
+						<p:inputText value="Fundos" required="true" size="25"
+							requiredMessage="Informe o complemento." />
 
 						<p:outputLabel value="CEP" />
 						<p:inputText value="40000-000" required="true"
 							requiredMessage="Informe o CEP." />
 
-					<p:outputLabel value="Cidade" />
-					<h:panelGroup>
-						<p:inputText value="Salvador" required="true" size="25"
-							requiredMessage="Informe a cidade" />
-				
-						<p:outputLabel value="UF" style="margin: 0 10px 0 10px;" />
-						<p:inputText value="BA" required="true" size="5"
-							requiredMessage="Informe a UF" />
-					</h:panelGroup>
+						<p:outputLabel value="Cidade" />
+						<h:panelGroup>
+							<p:inputText value="Salvador" required="true" size="25"
+								requiredMessage="Informe a cidade" />
 
-					<p:outputLabel value="" />
-					<p:commandButton value="Incluir"
-						update="logradouroTable inclusaoPanel"
-						oncomplete="tratarInclusaologradouro(args)" />
-				</h:panelGrid>
+							<p:outputLabel value="UF" style="margin: 0 10px 0 10px;" />
+							<p:inputText value="BA" required="true" size="5"
+								requiredMessage="Informe a UF" />
+						</h:panelGroup>
 
-			</h:panelGroup>
+						<p:outputLabel value="" />
+						<p:commandButton value="Incluir"
+							update="logradouroTable inclusaoPanel"
+							oncomplete="tratarInclusaologradouro(args)" />
+					</h:panelGrid>
 
-			<p:confirmDialog header="Exclusão de endereco" message="Tem certeza que deseja excluir o endereço?"
-	    		widgetVar="confirmacaoExclusao">
-	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
-	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" />
-	    	</p:confirmDialog>
+				</h:panelGroup>
 
-			<script>
+				<p:confirmDialog header="Exclusão de endereco"
+					message="Tem certeza que deseja excluir o endereço?"
+					widgetVar="confirmacaoExclusao">
+					<p:button value="Não"
+						onclick="confirmacaoExclusao.hide(); return false;" />
+					<p:commandButton value="Sim"
+						oncomplete="confirmacaoExclusao.hide();" />
+				</p:confirmDialog>
+
+				<script>
 				function tratarInclusaologradouro(args) {
 					if (!args.validationFailed) {
 						inclusaologradouroDialog.hide();
@@ -129,7 +141,7 @@
 				}
 			</script>
 
-		</p:dialog>
-
+			</p:dialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

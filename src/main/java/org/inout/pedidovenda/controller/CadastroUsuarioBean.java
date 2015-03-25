@@ -5,25 +5,26 @@ import java.io.Serializable;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
-import org.inout.pedidovenda.model.Produto;
+import org.inout.pedidovenda.model.Usuario;
 
 @Named
 @ViewScoped
-public class CadastroProdutoBean implements Serializable {
+public class CadastroUsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Produto produto;
 
-	public CadastroProdutoBean() {
-		produto = new Produto();
+	private Usuario usuario;
+	
+	public CadastroUsuarioBean() {
+		usuario = new Usuario();
 	}
 	
 	public void salvar() {
+		
 	}
-	
-	public Produto getProduto() {
-		return produto;
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
 }
