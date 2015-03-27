@@ -1,0 +1,21 @@
+-- Script de Categorias
+insert into pedido.categoria (descricao) values ('Computadores');
+insert into pedido.categoria (descricao) values ('Notebooks');
+insert into pedido.categoria (descricao) values ('Tablets');
+insert into pedido.categoria (descricao) values ('Monitores');
+insert into pedido.categoria (descricao) values ('Impressoras');
+insert into pedido.categoria (descricao) values ('Acessórios');
+
+select * from pedido.categoria;
+
+-- Script de Produto
+insert into pedido.produto (nome, sku, quantidade_estoque, valor_unitario, codigo_categoria) values ('Guaraná 2L', 'GUA00123', 10, 2.32, 1);
+
+-- Script de Usuario
+insert into pedido.usuario (nome, email, senha, codigo_grupo) values ('Robson Mattos', 'rjnmattos@gmail.com', '123', 1);
+
+-- Script de Grupo
+insert into pedido.grupo (nome, descricao) values ('Administrador', 'Administrador');
+
+-- Script de Cliente
+insert into pedido.cliente (nome, email, tipo, doc_receita_federal) values ('Mercado do Tiao', 'mercado@tiao.com', 'JURIDICA', '10123123000101');
