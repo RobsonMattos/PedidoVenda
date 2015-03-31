@@ -83,7 +83,7 @@ public class Produto implements Serializable {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
-	@NotNull
+	// @NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria", nullable = false)
 	public Categoria getCategoria() {

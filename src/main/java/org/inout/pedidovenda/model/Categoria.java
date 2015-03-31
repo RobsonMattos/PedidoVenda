@@ -20,7 +20,7 @@ public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 	private String Descricao;
 	private Categoria categoriaPai;
 	private List<Categoria> subcategorias = new ArrayList<>();
@@ -28,11 +28,11 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "codigo_categoria")
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

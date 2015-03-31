@@ -47,9 +47,9 @@ private ExceptionHandler wrapped;
 				} else if (negocioException != null) {
 					handled = true;
 					FacesUtil.addErrorMessage(negocioException.getMessage());
-				} else {
-					handled = true;
-					redirect("/Erro.xhtml");
+//				} else {
+//					handled = true;
+//					redirect("/Erro.xhtml");
 				}
 			} finally {
 				if (handled) {
