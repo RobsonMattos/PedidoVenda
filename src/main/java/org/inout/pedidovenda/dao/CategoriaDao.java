@@ -6,21 +6,32 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.inout.pedidovenda.IConsulta;
 import org.inout.pedidovenda.model.Categoria;
 
-public class CategoriaDao implements Serializable {
+public class CategoriaDao implements IConsulta<Categoria>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager manager;
-	
-	public List<Categoria> raizes() {
-		return manager.createQuery("from Categoria", Categoria.class).getResultList();	
+
+	@Override
+	public List<Categoria> obter() {
+		return manager.createQuery("from Categoria where categoriaPai is null",
+				Categoria.class).getResultList();
 	}
 
-	public Categoria porId(Long id) {
+	@Override
+	public Categoria obter(Long id) {
 		return manager.find(Categoria.class, id);
 	}
-	
+
+	public List<Categoria> obterSubCategorias(Categoria categoriaPai) {
+		return manager
+				.createQuery("from Categoria where categoriaPai = :pai",
+						Categoria.class).setParameter("pai", categoriaPai)
+				.getResultList();
+	}
+
 }

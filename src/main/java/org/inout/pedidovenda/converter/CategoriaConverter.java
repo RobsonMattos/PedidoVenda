@@ -10,7 +10,7 @@ import org.inout.pedidovenda.model.Categoria;
 import org.inout.pedidovenda.util.cdi.CDIServiceLocator;
 
 @FacesConverter(forClass = Categoria.class)
-public class CategoriaConverter implements Converter{
+public class CategoriaConverter implements Converter {
 	
 	//@Inject
 		private CategoriaDao categorias;
@@ -25,7 +25,7 @@ public class CategoriaConverter implements Converter{
 			
 			if (value != null) {
 				Long id = new Long(value);
-				retorno = categorias.porId(id);
+				retorno = categorias.obter(id);
 			}
 			
 			return retorno;
