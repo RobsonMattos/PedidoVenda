@@ -44,10 +44,7 @@ public class ProdutoDao implements IConsulta<Produto>, IPersist<Produto>,
 
 	@Override
 	public void salvar(Produto produto) {
-		EntityTransaction t = manager.getTransaction();
-		t.begin();
 		manager.merge(produto);
-		t.commit();
 	}
 
 	@Override
