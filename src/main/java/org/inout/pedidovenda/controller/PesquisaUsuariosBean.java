@@ -1,26 +1,36 @@
 package org.inout.pedidovenda.controller;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.inout.pedidovenda.model.Usuario;
+import org.inout.pedidovenda.service.UsuarioService;
+
 @Named
-@RequestScoped
+@ViewScoped
+public class PesquisaUsuariosBean implements Serializable {
 
-public class PesquisaUsuariosBean {
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private UsuarioService usuarioService;
+	
+	private List<Usuario> usuariosFiltrados;
 
-	private List<Integer> usuariosFiltrados;
-
+	
 	public PesquisaUsuariosBean() {
-		usuariosFiltrados = new ArrayList<>();
-		for (int i = 0; i < 50; i++) {
-			usuariosFiltrados.add(i);
-		}
+		
 	}
 	
-	public List<Integer> getUsuariosFiltrados() {
+	public void pesquisar() {
+		usuariosFiltrados = usuarioService.obter();
+	}
+	
+	public List<Usuario> getUsuariosFiltrados() {
 		return usuariosFiltrados;
 	}
 	

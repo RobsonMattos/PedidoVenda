@@ -2,9 +2,10 @@ package org.inout.pedidovenda;
 
 
 /**
+ * Interface com métodos comuns de persistencia
  * 
  * @author robson.Mattos
- *
+ * Data 03/04/2015
  * @param <T>
  */
 public interface IPersist <T> { 

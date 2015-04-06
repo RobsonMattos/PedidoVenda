@@ -5,28 +5,29 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.inout.pedidovenda.dao.CategoriaDao;
-import org.inout.pedidovenda.model.Categoria;
+import org.inout.pedidovenda.dao.UsuarioDao;
+import org.inout.pedidovenda.model.Produto;
+import org.inout.pedidovenda.model.Usuario;
 import org.inout.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Categoria.class)
-public class CategoriaConverter implements Converter {
+@FacesConverter(forClass = Usuario.class)
+public class UsuarioConverter implements Converter {
 
 	// @Inject
-	private CategoriaDao categorias;
+	private UsuarioDao usuarios;
 
-	public CategoriaConverter() {
-		categorias = CDIServiceLocator.getBean(CategoriaDao.class);
+	public UsuarioConverter() {
+		usuarios = CDIServiceLocator.getBean(UsuarioDao.class);
 	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
-		Categoria retorno = null;
+		Usuario retorno = null;
 
 		if (value != null) {
 			Long id = new Long(value);
-			retorno = categorias.obter(id);
+			retorno = usuarios.obter(id);
 		}
 
 		return retorno;
@@ -36,7 +37,8 @@ public class CategoriaConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			return ((Categoria) value).getId().toString();
+			Usuario usuario = (Usuario) value;
+			return usuario.getId() == null ? null : usuario.getId().toString();
 		}
 
 		return "";

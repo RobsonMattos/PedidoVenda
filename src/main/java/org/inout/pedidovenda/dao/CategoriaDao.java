@@ -1,15 +1,14 @@
 package org.inout.pedidovenda.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.inout.pedidovenda.IConsulta;
+import org.inout.pedidovenda.GenericDao;
 import org.inout.pedidovenda.model.Categoria;
 
-public class CategoriaDao implements IConsulta<Categoria>, Serializable {
+public class CategoriaDao extends GenericDao<Categoria> {
 
 	private static final long serialVersionUID = 1L;
 

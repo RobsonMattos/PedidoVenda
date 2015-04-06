@@ -10,6 +10,7 @@ import javax.inject.Named;
 import org.inout.pedidovenda.model.Produto;
 import org.inout.pedidovenda.service.ProdutoService;
 import org.inout.pedidovenda.service.filter.ProdutoFilter;
+import org.inout.pedidovenda.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -22,6 +23,7 @@ public class PesquisaProdutosBean implements Serializable {
 	
 	private ProdutoFilter filtro;
 	private List<Produto> produtosFiltrados;
+	private Produto produtoSelecionado;
 	
 	public PesquisaProdutosBean() {
 		filtro = new ProdutoFilter();
@@ -31,6 +33,13 @@ public class PesquisaProdutosBean implements Serializable {
 		produtosFiltrados = produtoService.Filtrar(filtro);
 	}
 	
+	public void excluir() {
+		produtoService.excluir(produtoSelecionado);
+		produtosFiltrados.remove(produtoSelecionado);
+		
+		FacesUtil.addInfoMessage("Produto " + produtoSelecionado.getSku() + " excluído com sucesso.");
+	}
+	
 	public ProdutoFilter getFiltro() {
 		return filtro;
 	}
@@ -38,5 +47,12 @@ public class PesquisaProdutosBean implements Serializable {
 	public List<Produto> getProdutosFiltrados() {
 		return produtosFiltrados;
 	}
-	
+
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
 }
