@@ -44,16 +44,28 @@ public class ProdutoService extends GenericService<ProdutoDao, Produto> {
 		return criteria.addOrder(Order.asc("nome")).list();
 	}
 
+	public Produto porSku(String sku) {
+		return dao.porSku(sku);
+	}
+
+	public Produto porId(Long id) {
+		return manager.find(Produto.class, id);
+	}
+
+	public List<Produto> porNome(String nome) {
+		return dao.porNome(nome);
+	}
+
 	@Override
 	@Transactional
-	public void salvar(Produto produto) {
+	public Produto salvar(Produto produto) {
 		Produto produtoExistente = dao.obter(produto.getSku());
 
 		if (produtoExistente != null && !produtoExistente.equals(produto)) {
 			throw new NegocioException("Produto com esse sku já existe!");
 		}
 
-		dao.salvar(produto);
+		return dao.salvar(produto);
 	}
 
 }

@@ -28,8 +28,8 @@ public abstract class GenericDao<T> implements
 		return (T) manager.find(getTypeClass(), id);
 	}
 
-	public void salvar(T objeto) {
-		manager.merge(objeto);
+	public T salvar(T objeto) {
+		return manager.merge(objeto);
 	}
 	
 	public void editar(T objeto) {

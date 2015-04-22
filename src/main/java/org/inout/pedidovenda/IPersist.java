@@ -14,7 +14,7 @@ public interface IPersist <T> {
 	 * Salva registro
 	 * @param objeto
 	 */
-	void salvar(T objeto);
+	T salvar(T objeto);
 	
 	/**
 	 * Edita registro

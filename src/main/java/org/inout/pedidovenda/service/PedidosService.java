@@ -1,5 +1,6 @@
 package org.inout.pedidovenda.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,7 +15,9 @@ import org.hibernate.criterion.Restrictions;
 import org.inout.pedidovenda.GenericService;
 import org.inout.pedidovenda.dao.PedidoDao;
 import org.inout.pedidovenda.model.Pedido;
+import org.inout.pedidovenda.model.StatusPedido;
 import org.inout.pedidovenda.service.filter.PedidoFilter;
+import org.inout.pedidovenda.util.jpa.Transactional;
 
 public class PedidosService extends GenericService<PedidoDao, Pedido> {
 
@@ -22,6 +25,9 @@ public class PedidosService extends GenericService<PedidoDao, Pedido> {
 	
 	@Inject
 	private EntityManager manager;
+	
+	@Inject
+	private PedidoDao pedidoDao;
 	
 	@SuppressWarnings("unchecked")
 	public List<Pedido> filtrados(PedidoFilter filtro) {
@@ -67,5 +73,17 @@ public class PedidosService extends GenericService<PedidoDao, Pedido> {
 		}
 		
 		return criteria.addOrder(Order.asc("id")).list();
+	}
+	
+	@Override
+	@Transactional
+	public Pedido salvar(Pedido pedido) {
+		if (pedido.isNovo()) {
+			pedido.setDataCriacao(new Date());
+			pedido.setStatus(StatusPedido.ORCAMENTO);
+		}
+		
+		pedido = this.pedidoDao.salvar(pedido);
+		return pedido;
 	}
 }

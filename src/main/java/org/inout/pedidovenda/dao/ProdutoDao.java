@@ -1,5 +1,7 @@
 package org.inout.pedidovenda.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -24,4 +26,22 @@ public class ProdutoDao extends GenericDao<Produto> {
 		}
 	}
 
+
+	public Produto porSku(String sku) {
+		try {
+			return manager
+					.createQuery("from Produto where upper(sku) = :sku",
+							Produto.class)
+					.setParameter("sku", sku.toUpperCase()).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	public List<Produto> porNome(String nome) {
+		return this.manager
+				.createQuery("from Produto where upper(nome) like :nome",
+						Produto.class)
+						.setParameter("nome", nome.toUpperCase() + "%").getResultList();
+	}
 }

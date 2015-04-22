@@ -8,24 +8,23 @@ insert into categoria (descricao) values ('Informática');
 insert into categoria (descricao) values ('Eletrodomésticos');
 insert into categoria (descricao) values ('Móveis');
 
-insert into categoria (descricao, categoria_pai_id) values ('Computadores', 1);
-insert into categoria (descricao, categoria_pai_id) values ('Notebooks', 1);
-insert into categoria (descricao, categoria_pai_id) values ('Tablets', 1);
-insert into categoria (descricao, categoria_pai_id) values ('Monitores', 1);
-insert into categoria (descricao, categoria_pai_id) values ('Impressoras', 1);
-insert into categoria (descricao, categoria_pai_id) values ('Acessórios', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Computadores', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Notebooks', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Tablets', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Monitores', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Impressoras', 1);
+insert into categoria (descricao, codigo_categoria_pai) values ('Acessórios', 1);
 
-insert into categoria (descricao, categoria_pai_id) values ('Ar condicionados', 2);
-insert into categoria (descricao, categoria_pai_id) values ('Fogões', 2);
-insert into categoria (descricao, categoria_pai_id) values ('Fornos elétricos', 2);
-insert into categoria (descricao, categoria_pai_id) values ('Microondas', 2);
-insert into categoria (descricao, categoria_pai_id) values ('Refrigeradores', 2);
+insert into categoria (descricao, codigo_categoria_pai) values ('Ar condicionados', 2);
+insert into categoria (descricao, codigo_categoria_pai) values ('Fogões', 2);
+insert into categoria (descricao, codigo_categoria_pai) values ('Fornos elétricos', 2);
+insert into categoria (descricao, codigo_categoria_pai) values ('Microondas', 2);
+insert into categoria (descricao, codigo_categoria_pai) values ('Refrigeradores', 2);
 
-insert into categoria (descricao, categoria_pai_id) values ('Cadeiras', 3);
-insert into categoria (descricao, categoria_pai_id) values ('Mesas', 3);
-insert into categoria (descricao, categoria_pai_id) values ('Racks', 3);
-insert into categoria (descricao, categoria_pai_id) values ('Sofás', 3);
-
+insert into categoria (descricao, codigo_categoria_pai) values ('Cadeiras', 3);
+insert into categoria (descricao, codigo_categoria_pai) values ('Mesas', 3);
+insert into categoria (descricao, codigo_categoria_pai) values ('Racks', 3);
+insert into categoria (descricao, codigo_categoria_pai) values ('Sofás', 3);
 select * from pedido.categoria;
 
 -- Script de Produto
@@ -39,3 +38,15 @@ insert into pedido.grupo (nome, descricao) values ('Administrador', 'Administrad
 
 -- Script de Cliente
 insert into pedido.cliente (nome, email, tipo, doc_receita_federal) values ('Mercado do Tiao', 'mercado@tiao.com', 'JURIDICA', '10123123000101');
+insert into pedido.cliente (nome, email, tipo, doc_receita_federal) values('Robson Mattos', 'rjnmattos@gmail.com', 'FISICA', '455275804100');
+
+-- Script de Pedido
+INSERT INTO pedido.pedido(data_criacao, observacao, data_entrega, valor_frete, 
+	valor_desconto, status, forma_pagamento, codigo_vendedor, codigo_cliente, entrega_cep, 
+    entrega_cidade, entrega_complemento, entrega_logradouro, entrega_numero, entrega_uf, valor_total)
+VALUES(CURDATE(), 'Teste de pedidos', CURDATE(), 1234, 12, 'ORCAMENTO', 'DINHEIRO',
+1, 1, '40000000', 'Salvador', 'Jardim Castro', 'Jardim Castro Alves', '117', 'Ba', 123456);
+
+-- Script de Produto
+INSERT INTO pedido.produto(nome, sku, valor_unitario, quantidade_estoque, codigo_categoria)
+VALUES('Produto 1', 'RO1111', 12.00, 10, 1);

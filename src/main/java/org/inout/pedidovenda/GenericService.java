@@ -24,8 +24,8 @@ public abstract class GenericService<O extends GenericDao<T>, T> implements
 	}
 	
 	@Transactional
-	public void salvar(T objeto) {
-		dao.salvar(objeto);
+	public T salvar(T objeto) {
+		return dao.salvar(objeto);
 	}
 	
 	@Transactional

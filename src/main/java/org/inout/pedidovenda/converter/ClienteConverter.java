@@ -5,27 +5,27 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.inout.pedidovenda.dao.UsuarioDao;
-import org.inout.pedidovenda.model.Usuario;
+import org.inout.pedidovenda.model.Cliente;
+import org.inout.pedidovenda.service.ClienteDao;
 import org.inout.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Usuario.class)
-public class UsuarioConverter implements Converter {
+@FacesConverter(forClass = Cliente.class)
+public class ClienteConverter implements Converter {
 
 	// @Inject
-	private UsuarioDao usuarios;
+	private ClienteDao clientes;
 
-	public UsuarioConverter() {
-		usuarios = CDIServiceLocator.getBean(UsuarioDao.class);
+	public ClienteConverter() {
+		this.clientes = CDIServiceLocator.getBean(ClienteDao.class);
 	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
-		Usuario retorno = null;
+		Cliente retorno = null;
 
 		if (value != null) {
-			retorno = usuarios.obter(new Long(value));
+			retorno = this.clientes.obter(new Long(value));
 		}
 
 		return retorno;
@@ -35,10 +35,8 @@ public class UsuarioConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			Usuario usuario = (Usuario) value;
-			return usuario.getId() == null ? null : usuario.getId().toString();
+			return ((Cliente) value).getId().toString();
 		}
-
 		return "";
 	}
 
